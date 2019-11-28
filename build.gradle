@@ -28,6 +28,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+    compile 'org.apache.pdfbox:pdfbox:2.0.16'
+    compile 'org.apache.pdfbox:pdfbox-debugger:2.0.16'
+    compile 'commons-cli:commons-cli:1.4'
 }
 
 task copyJars(type: Copy) {
