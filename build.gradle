@@ -1,10 +1,10 @@
 wrapper {
-    gradleVersion = '5.2.1'
+    gradleVersion = '7.6.1'
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 group = pGroup
 version = pVersion
@@ -16,10 +16,10 @@ if (project.hasProperty("topobyte")) {
 
 repositories {
     maven {
-        url 'http://mvn.topobyte.de'
+        url 'https://mvn.topobyte.de'
     }
     maven {
-        url 'http://mvn.slimjars.com'
+        url 'https://mvn.slimjars.com'
     }
     mavenCentral()
 }
@@ -28,9 +28,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile 'org.apache.pdfbox:pdfbox:2.0.16'
-    compile 'org.apache.pdfbox:pdfbox-debugger:2.0.16'
-    compile 'commons-cli:commons-cli:1.4'
+    implementation 'org.apache.pdfbox:pdfbox:2.0.16'
+    implementation 'org.apache.pdfbox:pdfbox-debugger:2.0.16'
+    implementation 'commons-cli:commons-cli:1.4'
 }
 
 task copyJars(type: Copy) {
@@ -40,7 +40,7 @@ task copyJars(type: Copy) {
 
 task copyDeps(type: Copy) {
     into "$buildDir/lib-run"
-    from configurations.runtime
+    from configurations.runtimeClasspath
 }
 
 task createRuntime(dependsOn: [copyJars, copyDeps]) {
